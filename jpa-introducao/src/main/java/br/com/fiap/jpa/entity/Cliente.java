@@ -72,6 +72,12 @@ public class Cliente {
 		this.genero = genero;
 	}
 
+	public Cliente() {
+		super();
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}

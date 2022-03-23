@@ -67,6 +67,10 @@ public class Empresa {
 		this.dataFundacao = dataFundacao;
 	}
 
+	public Empresa() {
+		super();
+	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
