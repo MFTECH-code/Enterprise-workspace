@@ -18,7 +18,7 @@ public class ExemploCadastro {
 		
 		EntityManager em = factory.createEntityManager();
 		
-		Cliente cliente = new Cliente("Matheus", "matheus@mail.com", new BigDecimal(100), LocalDate.of(2000, 11, 28), Genero.MASCULINO);
+		Cliente cliente = new Cliente("Knaaaae", "maaaasasats@mail.com", new BigDecimal(100), LocalDate.of(2000, 11, 28), Genero.MASCULINO);
 		
 		em.persist(cliente);
 		
@@ -26,10 +26,11 @@ public class ExemploCadastro {
 		em.getTransaction().commit();
 		System.out.println("Cliente cadastrado!");
 		
+		/*
 		Empresa empresa = new Empresa("Hospital Ka", "309292919", TipoEmpresa.SAUDE, LocalDate.of(1997, 7, 28));
 		
 		em.persist(empresa);
-		
+		*/
 		em.getTransaction().begin();
 		em.getTransaction().commit();
 		System.out.println("Empresa cadastrada!");

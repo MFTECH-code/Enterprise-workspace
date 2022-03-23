@@ -12,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +21,8 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import net.bytebuddy.asm.Advice.Local;
 
 
 @Entity
@@ -156,5 +160,15 @@ public class Cliente {
 
 	public void setGenero(Genero genero) {
 		this.genero = genero;
+	}
+	
+	@PrePersist
+	private void executar() {
+		System.out.println("Cadastrado...");
+	}
+	
+	@PostLoad
+	private void carregar() {
+		System.out.println("Deu certo");
 	}
 }
