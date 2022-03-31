@@ -4,9 +4,10 @@ import javax.persistence.EntityManager;
 
 import br.com.fiap.jpa.dao.VeiculoDao;
 import br.com.fiap.jpa.entities.Veiculo;
+import br.com.fiap.jpa.exception.InexistentItemException;
 import br.com.fiap.jpa.exception.TransactionExcepion;
 
-public class VeiculoDaoImplement extends DaoImplements implements VeiculoDao {
+public class VeiculoDaoImplement extends DaoImplementAbstract implements VeiculoDao {
 	
 	public VeiculoDaoImplement(EntityManager em) {
 		super(em);
@@ -22,9 +23,12 @@ public class VeiculoDaoImplement extends DaoImplements implements VeiculoDao {
 		}
 	}
 
-	public Veiculo procurar(Integer id) {
+	public Veiculo procurar(Integer id) throws InexistentItemException {
 		Veiculo result = em.find(Veiculo.class, id);
-		return result;
+		if (result != null) {
+			return result;			
+		}
+		throw new InexistentItemException();
 	}
 
 	public void atualizar(Veiculo veiculo) {
@@ -39,11 +43,13 @@ public class VeiculoDaoImplement extends DaoImplements implements VeiculoDao {
 	}
 
 	public void apagar(Integer id) {
-		Veiculo veiculo = procurar(id);
-		em.remove(veiculo);
-		
+		Veiculo veiculo;
 		try {
+			veiculo = procurar(id);
+			em.remove(veiculo);
 			doTransactions();
+		} catch (InexistentItemException e1) {
+			e1.printStackTrace();
 		} catch (TransactionExcepion e) {
 			e.printStackTrace();
 		}

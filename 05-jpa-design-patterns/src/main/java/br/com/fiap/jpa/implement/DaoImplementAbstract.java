@@ -4,10 +4,10 @@ import javax.persistence.EntityManager;
 
 import br.com.fiap.jpa.exception.TransactionExcepion;
 
-public abstract class DaoImplements {
+public abstract class DaoImplementAbstract {
 	protected EntityManager em;
 	
-	public DaoImplements(EntityManager em) {
+	public DaoImplementAbstract(EntityManager em) {
 		this.em = em;
 	}
 	

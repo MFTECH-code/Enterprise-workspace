@@ -18,7 +18,7 @@ public class Veiculo {
 	
 	@Id
 	@SequenceGenerator(name = "sq_veiculo", allocationSize = 1, sequenceName = "sq_veiculo")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_vaiculo")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_veiculo")
 	@Column(name = "cd_veiculo", insertable = false)
 	private Integer codigo;
 	
@@ -41,10 +41,9 @@ public class Veiculo {
 	@Column(name = "br_placa", length = 8, unique = true)
 	private String placa;
 
-	public Veiculo(Integer codigo, String modelo, Double valor, Integer ano, LocalDate revisao, Tipo tipo,
+	public Veiculo(String modelo, Double valor, Integer ano, LocalDate revisao, Tipo tipo,
 			String placa) {
 		super();
-		this.codigo = codigo;
 		this.modelo = modelo;
 		this.valor = valor;
 		this.ano = ano;
