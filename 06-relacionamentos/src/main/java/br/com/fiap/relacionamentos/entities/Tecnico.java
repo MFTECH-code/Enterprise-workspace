@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,6 +21,11 @@ public class Tecnico {
 	@Column(name = "cd_tecnico")
 	private Integer codigo;
 	
+	// Relacionamento 1:1 - Bidirecional (Não precisa criar)
+	// MappedBy obrigatório no lado que não recebe FK, o nome do atributo que mapeia a relação
+	@OneToOne(mappedBy = "tecnico")
+	private Time time;
+	
 	@Column(name = "nm_tecnico", length = 100, nullable = false)
 	private String nome;
 	
@@ -29,9 +35,8 @@ public class Tecnico {
 	@Column(name = "nr_tempo_carreira")
 	private Integer tempoCarreira;
 
-	public Tecnico(Integer codigo, String nome, LocalDate dataNascimento, Integer tempoCarreira) {
+	public Tecnico(String nome, LocalDate dataNascimento, Integer tempoCarreira) {
 		super();
-		this.codigo = codigo;
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.tempoCarreira = tempoCarreira;
@@ -47,6 +52,14 @@ public class Tecnico {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+	
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
 	}
 
 	public String getNome() {
