@@ -7,7 +7,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,6 +22,11 @@ public class Jogador {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_jogador")
 	@Column(name = "cd_jogador")
 	private Integer codigo;
+	
+	// Relacional N:1
+	@ManyToOne()
+	@JoinColumn(name = "cd_time", nullable = false)
+	private Time time;
 	
 	@Column(name = "nm_jogador", length = 80, nullable = false)
 	private String nome;
@@ -38,15 +45,19 @@ public class Jogador {
 	@Column(name = "ft_jogador")
 	private Byte[] foto;
 
-	public Jogador(Integer codigo, String nome, Integer camisa, PosicaoJogador posicao, Double salario) {
+	public Jogador(String nome, Integer camisa, PosicaoJogador posicao, Double salario, Time time) {
 		super();
-		this.codigo = codigo;
 		this.nome = nome;
 		this.camisa = camisa;
 		this.posicao = posicao;
 		this.salario = salario;
+		this.time = time;
 	}
-
+	
+	public void setTime(Time time) {
+		this.time = time;
+	}
+	
 	public Integer getCodigo() {
 		return codigo;
 	}
