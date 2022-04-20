@@ -54,6 +54,10 @@ public class Jogador {
 		this.time = time;
 	}
 	
+	public Jogador() {
+		super();
+	}
+	
 	public void setTime(Time time) {
 		this.time = time;
 	}

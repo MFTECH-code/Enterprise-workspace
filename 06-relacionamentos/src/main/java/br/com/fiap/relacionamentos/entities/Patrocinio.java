@@ -1,12 +1,14 @@
 package br.com.fiap.relacionamentos.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,6 +27,9 @@ public class Patrocinio {
 	
 	@Column(name = "dt_fim_contrato", nullable = false)
 	private LocalDate dataFimContrato;
+
+	@ManyToMany(mappedBy = "patrocinios")
+	private List<Time> times;
 
 	public Patrocinio(Integer codigo, String nome, LocalDate dataFimContrato) {
 		super();

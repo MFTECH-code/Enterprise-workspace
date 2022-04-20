@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -32,8 +33,12 @@ public class Time {
 	private Tecnico tecnico;
 
 	// Relacionamento 1:N
-	@OneToMany(mappedBy = "time", cascade = CascadeType.PERSIST)
+	@OneToMany(mappedBy = "time", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Jogador> jogadores;
+	
+	// Relacionamento N:M
+	@ManyToMany
+	private List<Patrocinio> patrocinios;
 	
 	@Column(name = "nm_time", length = 50, nullable = false)
 	private String nome;
@@ -58,6 +63,22 @@ public class Time {
 	public void addJogador(Jogador jogador) {
 		jogador.setTime(this);
 		jogadores.add(jogador);
+	}
+	
+	public List<Jogador> getJogadores() {
+		return jogadores;
+	}
+
+	public void setJogadores(List<Jogador> jogadores) {
+		this.jogadores = jogadores;
+	}
+
+	public List<Patrocinio> getPatrocinios() {
+		return patrocinios;
+	}
+
+	public void setPatrocinios(List<Patrocinio> patrocinios) {
+		this.patrocinios = patrocinios;
 	}
 
 	public Integer getCodigo() {
