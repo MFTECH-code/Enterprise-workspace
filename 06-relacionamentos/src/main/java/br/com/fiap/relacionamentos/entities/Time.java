@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -37,7 +38,10 @@ public class Time {
 	private List<Jogador> jogadores;
 	
 	// Relacionamento N:M
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "TB_TIME_PATROCINIO", 
+		joinColumns = @JoinColumn(name="cd_time"),
+		inverseJoinColumns = @JoinColumn(name="cd_patrocinio"))
 	private List<Patrocinio> patrocinios;
 	
 	@Column(name = "nm_time", length = 50, nullable = false)
@@ -46,11 +50,12 @@ public class Time {
 	@Column(name = "nm_estadio", length = 50)
 	private String nomeEstadio;
 
-	public Time(Tecnico tecnico, String nome, String nomeEstadio) {
+	public Time(Tecnico tecnico, String nome, String nomeEstadio, List<Patrocinio> patrocinadores) {
 		super();
 		this.tecnico = tecnico;
 		this.nome = nome;
 		this.nomeEstadio = nomeEstadio;
+		this.patrocinios = patrocinadores;
 		jogadores = new ArrayList<Jogador>();
 	}
 	

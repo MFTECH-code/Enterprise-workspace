@@ -1,6 +1,7 @@
 package br.com.fiap.relacionamentos.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -31,15 +32,15 @@ public class Patrocinio {
 	@ManyToMany(mappedBy = "patrocinios")
 	private List<Time> times;
 
-	public Patrocinio(Integer codigo, String nome, LocalDate dataFimContrato) {
+	public Patrocinio(String nome, LocalDate dataFimContrato) {
 		super();
-		this.codigo = codigo;
 		this.nome = nome;
 		this.dataFimContrato = dataFimContrato;
 	}
 	
 	public Patrocinio() {
 		super();
+		times = new ArrayList<Time>();
 	}
 
 	public Integer getCodigo() {
@@ -48,6 +49,14 @@ public class Patrocinio {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+
+	public List<Time> getTimes() {
+		return times;
+	}
+
+	public void setTimes(List<Time> times) {
+		this.times = times;
 	}
 
 	public String getNome() {
